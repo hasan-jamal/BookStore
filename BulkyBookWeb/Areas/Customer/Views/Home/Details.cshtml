@@ -1,0 +1,474 @@
+﻿@model ShoppingCart
+
+
+
+
+<main>
+    <!--Breadcrumb Area Start -->
+    <section class="breadcrumb-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12">
+                    <nav aria-label="breadcrumb">
+                        <ol class="breadcrumb">
+                            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+                            <li class="breadcrumb-item" aria-current="page">Category</li>
+                            <li class="breadcrumb-item" aria-current="page">Subcategory</li>
+                            <li class="breadcrumb-item" aria-current="page">Product</li>
+                            <li class="breadcrumb-item active" aria-current="page">Detail</li>
+                        </ol>
+                    </nav>
+                    <h5 class="text-primary">Detail</h5>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--Breadcrumb Area End -->
+    <!-- Product Details Area Start -->
+    <section class="product">
+        <div class="container">
+            <form method="post" asp-action="Details">
+                <input type="hidden" asp-for="ProductId" />
+                <div class="row">
+                    <div class="col-lg-6 col-md-5 col-12">
+                        <div class="product-slider">
+                            <div class="exzoom" id="exzoom">
+                                <div class="exzoom_img_box">
+                                    <ul class='exzoom_img_ul'>
+                                        <li><img src="@Model.Product.ImageUrl" /></li>
+
+                                    </ul>
+                                </div>
+                                <div class="exzoom_nav"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-7 col-12">
+                        <div class="product-pricelist">
+                            <h2 class="mb-2">@Model.Product.Title</h2>
+                            <p>By :@Model.Product.Author</p>
+                            <p>Category Type :@Model.Product.Category.Name</p>
+
+                            <div class="product-pricelist-ratting">
+                                <div class="price d-flex">
+                                    <div class="d-flex flex-column mx-2 box-flex ">
+                                        <p>Price For 1-15</p>
+                                        <span>$@Model.Product.ListPrice.ToString("0.00")</span>
+                                    </div>
+                                    <div class="d-flex flex-column mx-2 box-flex">
+                                        <p>Price For 51-100</p>
+                                        <span>$@Model.Product.Price50.ToString("0.00")</span>
+                                    </div>
+                                    <div class="d-flex flex-column mx-2 box-flex">
+                                        <p>Price For 100+ </p>
+                                        <span>$@Model.Product.Price100.ToString("0.00")</span>
+                                    </div>
+                                </div>
+                                @* <div class="star">
+                                    <ul>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li><i class="fas fa-star"></i></li>
+                                    <li>5.0</li>
+                                    <li class="point">(500 Rating)</li>
+                                    </ul>
+                                    </div>*@
+                            </div>
+                            <p>@Model.Product.Description</p>
+                            <div class="product-pricelist-selector">
+
+                                <div class="product-pricelist-selector-quantity">
+                                    <h6>quantity</h6>
+                                    <div class="quantity-control" data-quantity="">
+                                        <a class="quantity-btn" data-quantity-minus="">
+                                            <svg viewBox="0 0 409.6 409.6">
+                                                <g>
+                                                    <g>
+                                                        <path d="M392.533,187.733H17.067C7.641,187.733,0,195.374,0,204.8s7.641,17.067,17.067,17.067h375.467 c9.426,0,17.067-7.641,17.067-17.067S401.959,187.733,392.533,187.733z" />
+                                                    </g>
+                                                </g>
+                                            </svg>
+                                        </a>
+                                        <input type="number" asp-for="Count" class="quantity-input" data-quantity-target="" step="0.1" min="1" max="">
+                                        <a class="quantity-btn" data-quantity-plus="">
+                                            <svg viewBox="0 0 426.66667 426.66667">
+                                                <path d="m405.332031 192h-170.664062v-170.667969c0-11.773437-9.558594-21.332031-21.335938-21.332031-11.773437 0-21.332031 9.558594-21.332031 21.332031v170.667969h-170.667969c-11.773437 0-21.332031 9.558594-21.332031 21.332031 0 11.777344 9.558594 21.335938 21.332031 21.335938h170.667969v170.664062c0 11.777344 9.558594 21.335938 21.332031 21.335938 11.777344 0 21.335938-9.558594 21.335938-21.335938v-170.664062h170.664062c11.777344 0 21.335938-9.558594 21.335938-21.335938 0-11.773437-9.558594-21.332031-21.335938-21.332031zm0 0" />
+                                            </svg>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-pricelist-selector-button">
+                                <button class="btn cart-bg " type="submit">
+                                    Add to cart
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"
+                                         fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                         stroke-linejoin="round" class="feather feather-shopping-cart">
+                                        <circle cx="9" cy="21" r="1"></circle>
+                                        <circle cx="20" cy="21" r="1"></circle>
+                                        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <a class="btn btn-secondary cart-hart" asp-area="Customer" asp-controller="Home" asp-action="Index">
+                                    Back To Home
+                                </a>
+                                <div class="product-pricelist-selector-button-item">
+                                    <div class="shipping">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="21.4" height="17.937"
+                                                 viewBox="0 0 21.4 17.937">
+                                                <g id="Truck_Icon" data-name="Truck Icon"
+                                                   transform="translate(-0.8 -3.8)">
+                                                    <path id="Path_14" data-name="Path 14" d="M1.5,4.5H15.112V16.3H1.5Z"
+                                                          fill="none" stroke="#335aff" stroke-linecap="round"
+                                                          stroke-linejoin="round" stroke-width="1.4" />
+                                                    <path id="Path_15" data-name="Path 15"
+                                                          d="M24,12h3.63l2.722,2.722V19.26H24Z"
+                                                          transform="translate(-8.852 -3)" fill="none" stroke="#335aff"
+                                                          stroke-linecap="round" stroke-linejoin="round"
+                                                          stroke-width="1.4" />
+                                                    <path id="Path_16" data-name="Path 16"
+                                                          d="M9.037,26.269A2.269,2.269,0,1,1,6.769,24a2.269,2.269,0,0,1,2.269,2.269Z"
+                                                          transform="translate(-1.185 -7.5)" fill="none" stroke="#335aff"
+                                                          stroke-linecap="round" stroke-linejoin="round"
+                                                          stroke-width="1.4" />
+                                                    <path id="Path_17" data-name="Path 17"
+                                                          d="M28.537,26.269A2.269,2.269,0,1,1,26.269,24,2.269,2.269,0,0,1,28.537,26.269Z"
+                                                          transform="translate(-8.852 -7.5)" fill="none" stroke="#335aff"
+                                                          stroke-linecap="round" stroke-linejoin="round"
+                                                          stroke-width="1.4" />
+                                                </g>
+                                            </svg>
+
+                                        </div>
+                                        <p>Free Shipping Cast</p>
+                                    </div>
+                                    <div class="delivery">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="17.5" height="17.5"
+                                                 viewBox="0 0 17.5 17.5">
+                                                <g id="Icon" transform="translate(-2.25 -2.25)">
+                                                    <path id="Path_20" data-name="Path 20"
+                                                          d="M19,11a8,8,0,1,1-8-8A8,8,0,0,1,19,11Z" fill="none"
+                                                          stroke="#335aff" stroke-linecap="round" stroke-linejoin="round"
+                                                          stroke-width="1.5" />
+                                                    <path id="Path_21" data-name="Path 21" d="M18,9v4.8l3.2,1.6"
+                                                          transform="translate(-7 -2.8)" fill="none" stroke="#335aff"
+                                                          stroke-linecap="round" stroke-linejoin="round"
+                                                          stroke-width="1.5" />
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <p>3 Days Delivery Time</p>
+                                    </div>
+                                    <div class="cash">
+                                        <div class="icon">
+                                            <svg xmlns="http://www.w3.org/2000/svg" width="10" height="16"
+                                                 viewBox="0 0 10 16">
+                                                <path id="Icon"
+                                                      d="M14.863,11.522c-2.23-.524-2.947-1.067-2.947-1.911,0-.969.992-1.644,2.652-1.644,1.749,0,2.4.756,2.456,1.867H19.2a3.655,3.655,0,0,0-3.153-3.387V4.5H13.095V6.42c-1.906.373-3.438,1.493-3.438,3.209,0,2.053,1.876,3.076,4.617,3.671,2.456.533,2.947,1.316,2.947,2.142,0,.613-.481,1.591-2.652,1.591-2.024,0-2.819-.818-2.927-1.867H9.48c.118,1.947,1.729,3.04,3.615,3.4V20.5h2.947V18.589c1.916-.329,3.438-1.333,3.438-3.156C19.48,12.909,17.093,12.047,14.863,11.522Z"
+                                                      transform="translate(-9.48 -4.5)" fill="#335aff" />
+                                            </svg>
+                                        </div>
+                                        <p>Cash on Delivery</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </section>
+    <!-- Product Details Area End -->
+    <!-- Features Section Start -->
+  @*  <section class="features bg-lightwhite">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="section-title">
+                        <h2>Featured Products</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="features-wrapper">
+                <div class="features-active">
+                    <div class="product-item">
+                        <div class="product-item-image">
+                            <a href="product-details.html">
+                                <img src="dist/images/product/05.jpg" alt="Product Name"
+                                     class="img-fluid">
+                            </a>
+                            <div class="cart-icon">
+                                <a href="#"><i class="far fa-heart"></i></a>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.75" height="16.75"
+                                         viewBox="0 0 16.75 16.75">
+                                        <g id="Your_Bag" data-name="Your Bag" transform="translate(0.75)">
+                                            <g id="Icon" transform="translate(0 1)">
+                                                <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(4.773 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(12.273 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <path id="Path_3" data-name="Path 3"
+                                                      d="M1,1H3.727l1.827,9.564a1.38,1.38,0,0,0,1.364,1.15h6.627a1.38,1.38,0,0,0,1.364-1.15L16,4.571H4.409"
+                                                      transform="translate(-1 -1)" fill="none" stroke="#1a2224"
+                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                      stroke-width="1.5" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-item-info">
+                            <a href="product-details.html">BERRY TYPE-II: C1N Backpack</a>
+                            <span>$975</span> <del>$999</del>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-item-image">
+                            <a href="product-details.html">
+                                <img src="dist/images/product/04.jpg" alt="Product Name"
+                                     class="img-fluid">
+                            </a>
+                            <div class="cart-icon">
+                                <a href="#"><i class="far fa-heart"></i></a>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.75" height="16.75"
+                                         viewBox="0 0 16.75 16.75">
+                                        <g id="Your_Bag" data-name="Your Bag" transform="translate(0.75)">
+                                            <g id="Icon" transform="translate(0 1)">
+                                                <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(4.773 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(12.273 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <path id="Path_3" data-name="Path 3"
+                                                      d="M1,1H3.727l1.827,9.564a1.38,1.38,0,0,0,1.364,1.15h6.627a1.38,1.38,0,0,0,1.364-1.15L16,4.571H4.409"
+                                                      transform="translate(-1 -1)" fill="none" stroke="#1a2224"
+                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                      stroke-width="1.5" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-item-info">
+                            <a href="product-details.html">BERRY TYPE-II: C1N Backpack</a>
+                            <span>$975</span> <del>$999</del>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-item-image">
+                            <a href="product-details.html">
+                                <img src="dist/images/product/01.jpg" alt="Product Name"
+                                     class="img-fluid">
+                            </a>
+                            <div class="cart-icon">
+                                <a href="#"><i class="far fa-heart"></i></a>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.75" height="16.75"
+                                         viewBox="0 0 16.75 16.75">
+                                        <g id="Your_Bag" data-name="Your Bag" transform="translate(0.75)">
+                                            <g id="Icon" transform="translate(0 1)">
+                                                <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(4.773 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(12.273 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <path id="Path_3" data-name="Path 3"
+                                                      d="M1,1H3.727l1.827,9.564a1.38,1.38,0,0,0,1.364,1.15h6.627a1.38,1.38,0,0,0,1.364-1.15L16,4.571H4.409"
+                                                      transform="translate(-1 -1)" fill="none" stroke="#1a2224"
+                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                      stroke-width="1.5" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-item-info">
+                            <a href="product-details.html">BERRY TYPE-II: C1N Backpack</a>
+                            <span>$975</span> <del>$999</del>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-item-image">
+                            <a href="product-details.html">
+                                <img src="dist/images/product/02.jpg" alt="Product Name"
+                                     class="img-fluid">
+                            </a>
+                            <div class="cart-icon">
+                                <a href="#"><i class="far fa-heart"></i></a>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.75" height="16.75"
+                                         viewBox="0 0 16.75 16.75">
+                                        <g id="Your_Bag" data-name="Your Bag" transform="translate(0.75)">
+                                            <g id="Icon" transform="translate(0 1)">
+                                                <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(4.773 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(12.273 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <path id="Path_3" data-name="Path 3"
+                                                      d="M1,1H3.727l1.827,9.564a1.38,1.38,0,0,0,1.364,1.15h6.627a1.38,1.38,0,0,0,1.364-1.15L16,4.571H4.409"
+                                                      transform="translate(-1 -1)" fill="none" stroke="#1a2224"
+                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                      stroke-width="1.5" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-item-info">
+                            <a href="product-details.html">BERRY TYPE-II: C1N Backpack</a>
+                            <span>$975</span> <del>$999</del>
+                        </div>
+                    </div>
+                    <div class="product-item">
+                        <div class="product-item-image">
+                            <a href="product-details.html">
+                                <img src="dist/images/product/03.jpg" alt="Product Name"
+                                     class="img-fluid">
+                            </a>
+                            <div class="cart-icon">
+                                <a href="#"><i class="far fa-heart"></i></a>
+                                <a href="#">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="16.75" height="16.75"
+                                         viewBox="0 0 16.75 16.75">
+                                        <g id="Your_Bag" data-name="Your Bag" transform="translate(0.75)">
+                                            <g id="Icon" transform="translate(0 1)">
+                                                <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(4.773 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <ellipse id="Ellipse_3" data-name="Ellipse 3" cx="0.682" cy="0.714"
+                                                         rx="0.682" ry="0.714" transform="translate(12.273 13.571)"
+                                                         fill="none" stroke="#1a2224" stroke-linecap="round"
+                                                         stroke-linejoin="round" stroke-width="1.5" />
+                                                <path id="Path_3" data-name="Path 3"
+                                                      d="M1,1H3.727l1.827,9.564a1.38,1.38,0,0,0,1.364,1.15h6.627a1.38,1.38,0,0,0,1.364-1.15L16,4.571H4.409"
+                                                      transform="translate(-1 -1)" fill="none" stroke="#1a2224"
+                                                      stroke-linecap="round" stroke-linejoin="round"
+                                                      stroke-width="1.5" />
+                                            </g>
+                                        </g>
+                                    </svg>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="product-item-info">
+                            <a href="product-details.html">BERRY TYPE-II: C1N Backpack</a>
+                            <span>$975</span> <del>$999</del>
+                        </div>
+                    </div>
+                </div>
+                <div class="slider-arrows">
+                    <div class="prev-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="9.414" height="16.828"
+                             viewBox="0 0 9.414 16.828">
+                            <path id="Icon_feather-chevron-left" data-name="Icon feather-chevron-left"
+                                  d="M20.5,23l-7-7,7-7" transform="translate(-12.5 -7.586)" fill="none"
+                                  stroke="#1a2224" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                        </svg>
+                    </div>
+                    <div class="next-arrow">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="9.414" height="16.828"
+                             viewBox="0 0 9.414 16.828">
+                            <path id="Icon_feather-chevron-right" data-name="Icon feather-chevron-right"
+                                  d="M13.5,23l5.25-5.25.438-.437L20.5,16l-7-7" transform="translate(-12.086 -7.586)"
+                                  fill="none" stroke="#1a2224" stroke-linecap="round" stroke-linejoin="round"
+                                  stroke-width="2" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="features-morebutton text-center">
+                        <a class="btn bt-glass" href="#">View All Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- Features Section End -->*@
+
+
+     
+</main>
+
+
+
+
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+           (function () {
+      "use strict";
+      var jQueryPlugin = (window.jQueryPlugin = function (ident, func) {
+        return function (arg) {
+          if (this.length > 1) {
+            this.each(function () {
+              var $this = $(this);
+
+              if (!$this.data(ident)) {
+                $this.data(ident, func($this, arg));
+              }
+            });
+
+            return this;
+          } else if (this.length === 1) {
+            if (!this.data(ident)) {
+              this.data(ident, func(this, arg));
+            }
+
+            return this.data(ident);
+          }
+        };
+      });
+    })();
+
+    (function () {
+      "use strict";
+      function Guantity($root) {
+        const element = $root;
+        const quantity = $root.first("data-quantity");
+        const quantity_target = $root.find("[data-quantity-target]");
+        const quantity_minus = $root.find("[data-quantity-minus]");
+        const quantity_plus = $root.find("[data-quantity-plus]");
+        var quantity_ = quantity_target.val();
+        $(quantity_minus).click(function () {
+          quantity_target.val(--quantity_);
+        });
+        $(quantity_plus).click(function () {
+          quantity_target.val(++quantity_);
+        });
+      }
+      $.fn.Guantity = jQueryPlugin("Guantity", Guantity);
+      $("[data-quantity]").Guantity();
+    })();
+
+
+</script>
+
